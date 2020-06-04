@@ -1,6 +1,10 @@
 # ECDSATest
 
+Test encrypting/decrypting using ECDSA and a private key stored in Secure Enclave.
+
 Supports: iOS 10.0 and above
+
+This is a very bare demo. There is no UI in the app - check the `print()` logs for the output. All the demo code happens in `AppDelegate` on launch.
 
 ## Branches:
 
@@ -21,6 +25,12 @@ To install the specific cocoapods version run
 
 ```
 bundle install
+```
+
+Then generate the project
+
+```
+bundle exec xcake make
 ```
 
 Then install the pods
