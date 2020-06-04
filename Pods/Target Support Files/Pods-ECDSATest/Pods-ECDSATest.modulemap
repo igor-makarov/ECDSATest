@@ -1,0 +1,6 @@
+framework module Pods_ECDSATest {
+  umbrella header "Pods-ECDSATest-umbrella.h"
+
+  export *
+  module * { export * }
+}

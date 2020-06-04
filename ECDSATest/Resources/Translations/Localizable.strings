@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  ECDSATest
+
+  Copyright © AwesomeCompany. All rights reserved.
+*/
+
+// MARK: Common
+
+"common.ok" = "Ok";
+"common.cancel" = "Cancel";
+"common.error" = "Error";
