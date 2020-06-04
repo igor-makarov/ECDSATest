@@ -25,7 +25,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // App structure
         router.loadMainAppStructure()
 
+        // Enrolling a keychain item into Face ID cannot happen immediately on launch
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
+            self.encryptionTest()
+        }
+
         return true
+    }
+
+    func encryptionTest() {
+        let tag = "tag-enclave4"
+        let ecdsa = ECDSAEncryption(useSecureEnclave: true, tag: tag)
+        do {
+            let encrypted: String
+            if let string = UserDefaults.standard.string(forKey: tag) {
+                encrypted = string
+                print("encrypted: \(encrypted)")
+            } else {
+                let input = Data("test string".utf8)
+                let encryptedNewly = try ecdsa.encrypt(input: input)
+                UserDefaults.standard.set(encryptedNewly, forKey: tag)
+                print("encryptedNewly: \(encryptedNewly)")
+                encrypted = encryptedNewly
+            }
+            let decrypted = try ecdsa.decrypt(input: encrypted)
+            // swiftlint:disable:next force_unwrapping
+            print("decrypted: \(String(data: decrypted, encoding: .utf8)!)")
+        } catch let error {
+            print("error: \(error)")
+        }
     }
 
     func application(_ application: UIApplication,
